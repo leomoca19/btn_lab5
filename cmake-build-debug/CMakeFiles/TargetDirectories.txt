@@ -1,0 +1,5 @@
+C:/source/btn-lab5/cmake-build-debug/CMakeFiles/btn_lab5.dir
+C:/source/btn-lab5/cmake-build-debug/CMakeFiles/server.dir
+C:/source/btn-lab5/cmake-build-debug/CMakeFiles/client.dir
+C:/source/btn-lab5/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/source/btn-lab5/cmake-build-debug/CMakeFiles/rebuild_cache.dir
