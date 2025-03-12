@@ -1,19 +1,21 @@
 #include <fstream>
+#include <iostream>
 #include "Inventory.h"
 
-using std::string, std::stoi;
+using std::string, std::stoi, std::ifstream, std::ofstream, std::ofstream, std::rand, std::endl, std::cout, std::cin;
 
 /**
  *  This constructor attempts to load products from file
  *  If file is not found or is empty, system will load and save random data
  */
-Inventory::Inventory(const char *fname) {
-    std::ifstream file(fname);
-    if (file.is_open()) {
-        string line;
-        while (getline(file, line, '\n')) {
-            // UPC:XXXX Quantity:XXX
-
+Inventory::Inventory(const char* fname)
+{
+    ifstream file(fname);
+    if (file.is_open())
+    {
+        string line; // UPC:XXXX Quantity:XXX
+        while (getline(file, line, '\n'))
+        {
             // extract upc and qty from record
             unsigned short delim_pos = line.find(':');
             const unsigned short upc = stoi(line.substr(0, delim_pos));
@@ -27,14 +29,96 @@ Inventory::Inventory(const char *fname) {
         }
     }
     if (!products.size())
-        populate();
+        populate(fname);
 }
 
-void Inventory::populate() {
-    // open file for wiritng
-    // create random data
-    // load random data to memory
-    // save random data to file
+void Inventory::populate(const char* fname)
+{
+    // load random data into memory
+    for (unsigned short i = 0; i < 11; i++)
+    {
+        const unsigned short upc = 1000 + i;
+        const unsigned short qty = rand() % 1000;
+
+        products[upc] = qty;
+    }
+
+    // save data to file
+    ofstream file(fname);
+    file << this;
+}
+
+ostream& operator<<(ostream& os, const Inventory& other)
+{
+    for (const auto& [upc, qty] : other.products)
+    {
+        os << "UPC: " << upc << " Quantity: " << qty << endl;
+    }
+    return os;
+}
+
+void Inventory::sell()
+{
+    string inp;
+    bool repeat = true;
+
+    while (repeat)
+    {
+        cout << "Enter a upc: ";
+        cin >> inp;
+
+        const unsigned short upc = stoi(inp);
+        if ((repeat = !products.contains(upc))) // repeat if upc not in system
+        {
+            repeat = true;
+            while (repeat)
+            {
+                cout << "Enter a quantity:";
+                cin >> inp;
+
+                const unsigned short qty = stoi(inp);
+                if ((repeat = qty > products[upc]))
+                {
+                    cout << "Not enough items in system";
+                }
+                else
+                {
+                    products[upc] -= qty;
+                    cout << format("Product {} sold {} itmes\n{}", upc, qty, products[upc]);
+                }
+            }
+        }
+    }
+}
+
+string Inventory::menuOptions()
+{
+    return "Please select an option:"
+        "0 - Exit\n"
+        "1 - display local inventory\n"
+        "2 - display server inventory\n"
+        "3 - buy from server\n";
+}
+
+void Inventory::menu()
+{
+    // init local inventory with client data
+    string inp;
+
+    while (true)
+    {
+        cout << menuOptions();
+
+        switch (stoi(inp))
+        {
+        case
+        default: cout << "Invalid input";
+        case 0: return;
+        case 1: cout << this;
+        case 2: cout << "Under construction\n";
+        case 3: cout << "Under construction\n";
+        }
+    }
 }
 
 /*
@@ -145,3 +229,4 @@ if __name__ == '__main__':
     i = ItemManager('items.pkl')
     i.menu()
  */
+

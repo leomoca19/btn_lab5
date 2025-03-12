@@ -8,21 +8,20 @@
 using std::ostream, std::map;
 
 class Inventory {
-private:
+public:
     map<const unsigned short, unsigned short> products;
 
-public:
     Inventory(const char *fname = "inventory.txt");
 
-    void populate();
+    void populate(const char* fname);
 
-    void display() const;
+    static std::string menuOptions();
 
-    void printOptions() const;
+    // void display() const;
 
-    void load();
+    // void load(const char *fname);
 
-    void save();
+    // void save() const;
 
     void sell();
 
