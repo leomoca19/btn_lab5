@@ -50,14 +50,14 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "client::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-client-Debug-819955e1ecbb0a4f7c95.json",
+					"jsonFile" : "target-client-Debug-45327ab517d697d8c07c.json",
 					"name" : "client",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "server::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-server-Debug-24c209532933b960b5f0.json",
+					"jsonFile" : "target-server-Debug-88707c38d21c98922c95.json",
 					"name" : "server",
 					"projectIndex" : 0
 				}
@@ -67,8 +67,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/source/btn-lab5/cmake-build-debug",
-		"source" : "C:/source/btn-lab5"
+		"build" : "C:/source/btn_lab5/cmake-build-debug",
+		"source" : "C:/source/btn_lab5"
 	},
 	"version" : 
 	{
