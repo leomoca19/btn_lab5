@@ -1,54 +1,46 @@
 #ifndef INVENTORY_H
 #define INVENTORY_H
 
-#include <iostream>
 #include <map>
-#include "Product.h"
+using std::map, std::string;
 
-using std::ostream, std::map;
+class Inventory
+{
+    map<const size_t, size_t> products;
+    const char* owner;
 
-class Inventory {
-public:
-    map<const unsigned short, unsigned short> products;
+    string fname() const
+    {
+        const std::string fname = owner;
+        return fname + ".txt";
+    }
 
-    Inventory(const char *fname = "inventory.txt");
-
-    void populate(const char* fname);
-
-    static std::string menuOptions();
-
-    // void display() const;
-
-    // void load(const char *fname);
-
-    // void save() const;
+    static string menuOptions()
+    {
+        return "Select an option\n"
+            "0 - Exit\n"
+            "1 - Display local inventory\n"
+            "2 - Display server inventory\n"
+            "3 - Buy from server\n>";
+    }
 
     void sell();
+    void populate();
+
+    bool in_keyes(const size_t upc) const;
+
+
+public:
+    Inventory(const char* owner);
+
+    map<const unsigned short, unsigned short> getProducts() const
+    {
+        return std::map<const unsigned short, unsigned short>(products.begin(), products.end());
+    }
 
     void menu();
 };
 
-inline ostream &operator<<(const ostream &os, const Inventory &other);
+inline std::ostream& operator<<(std::ostream& os, const Inventory& other);
 
 #endif //INVENTORY_H
-
-
-/*
-class ItemManager():
-
-    def __init__(self, fname: str) -> None:
-    def loadBackup(self) -> None:
-    @staticmethod
-    def printOpts() -> None:
-    def __len__(self) -> int:
-    def __str__(self) -> str:
-    def save(self) -> None:
-    def addItem(self, upc: str, qty: int) -> None:
-    def findItemByUpc(self, upc: str) -> Optional[Item]:
-    def getItemQty(self) -> Tuple[Item, int]:
-    def display(self) -> None:
-    def sell(self) -> None:
-    def restock(self) -> None:
-    def menu(self) -> None:
-*/
-
